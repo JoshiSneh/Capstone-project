@@ -13,7 +13,7 @@ classes = pickle.load(open('labels.pkl', 'rb'))
 
 # get value from enviroment variable
 tenorflow_url = os.environ.get(
-    'TENSORFLOW_URL', 'http://localhost:8501/v1/models/multilable_model:predict')
+    'TENSORFLOW_URL', 'http://localhost:4000/v1/models/multilabel_model:predict')
 
 predict_threshold = os.environ.get(
     'pred_threshold', "0.2")
