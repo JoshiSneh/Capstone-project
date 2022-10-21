@@ -28,7 +28,7 @@ def get_responce_from_model_server(msg):
     headers = {"content-type": "application/json"}
     json_response = requests.post(
         tenorflow_url, data=data, headers=headers)
-    predictions = json.loads(json_response.text)['predictions']
+    predictions = json.loads(json_response.text)
     return predictions
 
 # create a dictionory of predection and class name
