@@ -1,184 +1,181 @@
-// Variables
-$primary: rgba(23, 190, 187, 1);
-$secondary: rgba(240, 166, 202, 1);
-
-$active: rgba(23, 190, 187, 0.8);
-$busy: rgba(252, 100, 113, 0.8);
-$away: rgba(255, 253, 130, 0.8);
-
-// Triangle Mixin
-@mixin triangle($color, $size, $direction) {
-  width: 0;
-  height: 0;
-  @if $direction == "up" {
-    border-right: ($size + px) solid transparent;
-    border-left: ($size + px) solid transparent;
-    border-bottom: ($size + px) solid $color;
-  }
-  @if $direction == "down" {
-    border-right: ($size + px) solid transparent;
-    border-left: ($size + px) solid transparent;
-    border-top: ($size + px) solid $color;
-  } 
-  @if $direction == "right" {
-    border-top: ($size + px) solid transparent;
-    border-bottom: ($size + px) solid transparent;
-    border-left: ($size + px) solid $color;
-  }
-  @if $direction == "left" {
-    border-top: ($size + px) solid transparent;
-    border-bottom: ($size + px) solid transparent;
-    border-right: ($size + px) solid $color;
-    }
-}
-
 * {
-  margin: 0; padding: 0;
   box-sizing: border-box;
-  font-family: 'Nunito', sans-serif;
 }
-
-html,body {
-  background: linear-gradient(120deg, $primary, $secondary);
+body {
+  background-color: #abd9e9;
+  font-family: Arial;
+}
+#container {
+  width: 1000px;
+  height: 850px;
+  background: #eff3f7;
+  margin: 0 auto;
+  font-size: 0;
+  border-radius: 5px;
   overflow: hidden;
 }
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-  width: 100vw;
-  h1 {
-    margin: 0.5em auto;
-    color: #FFF;
-    text-align: center;
-  }
+main {
+  width: 1000px;
+  height: 850px;
+  display: inline-block;
+  font-size: 15px;
+  vertical-align: top;
 }
 
-.chatbox {
-  background: rgba(255, 255, 255, 0.05);
-  width: 600px;
-  height: 75%;
-  border-radius: 0.2em;
-  position: relative;
-  box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.1);
-  &__messages {
-    &:nth-of-type(odd) .chatbox__messages__user-message--ind-message {
-      float: right;
-      &:after {
-        content: '';
-        position: absolute;
-        margin: -1.5em -17.06em;
-        @include triangle(rgba(255, 255, 255, 0.2), 10, left);
-      }
-    }
-    &:nth-of-type(even) .chatbox__messages__user-message--ind-message {
-      float: left;
-      &:after {
-      content: '';
-      position: absolute;
-      margin: -1.5em 1.87em;
-      @include triangle(rgba(255, 255, 255, 0.2), 10, right);
-      }
-    }
-  }
-  &__messages__user-message {
-    width: 450px;
-  }
-  &__messages__user-message--ind-message {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 1em 0;
-    height: auto;
-    width: 65%;
-    border-radius: 5px;
-    margin: 2em 1em;
-    overflow: auto;
-    & > p.name {
-      color: #FFF;
-      font-size: 1em;
-    }
-    & > p.message {
-      color: #FFF;
-      font-size: 0.7em;
-      margin: 0 2.8em;
-    }
-  }
-  &__user-list {
-    background: rgba(255, 255, 255, 0.1);
-    width: 25%;
-    height: 100%;
-    float: right;
-    border-top-right-radius: 0.2em;
-    border-bottom-right-radius: 0.2em;
-    h1 {
-      background: rgba(255, 255, 255, 0.05);
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 0.9em;
-      padding: 1em;
-      margin: 0;
-      font-weight: 300;
-      text-align: center;
-    }
-  }
-  &__user {
-    width: 0.5em;
-    height: 0.5em;
-    border-radius: 100%;
-    margin: 1em 0.7em;
-    &--active {
-      @extend .chatbox__user;
-      background: $active;
-    }
-    &--busy {
-      @extend .chatbox__user;
-      background: $busy;
-    }
-    &--away {
-      @extend .chatbox__user;
-      background: $away;
-    }
-  }
-  p {
-    float: left;
-    text-align: left;
-    margin: -0.25em 2em;
-    font-size: 0.7em;
-    font-weight: 300;
-    color: #FFF;
-    width: 200px;
-  }
-  form {
-    background: #222;
-    input {
-      background: rgba(255, 255, 255, 0.03);
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      border: none;
-      width: 75%;
-      padding: 1.2em;
-      outline: none;
-      color: rgba(255, 255, 255, 0.9);
-      font-weight: 300;
-    }
-  }
+h2,
+h3 {
+  margin: 0;
 }
 
-// Placeholder Styling
-::-webkit-input-placeholder {
-   color: rgba(255, 255, 255, 0.9);
+.status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 7px;
+}
+.green {
+  background-color: #58b666;
+}
+.orange {
+  background-color: #ff725d;
+}
+.blue {
+  background-color: #6fbced;
+  margin-right: 0;
+  margin-left: 7px;
 }
 
-:-moz-placeholder {
-   color: rgba(255, 255, 255, 0.9);  
+main header {
+  height: 110px;
+  padding: 30px 20px 30px 40px;
+}
+main header > * {
+  display: inline-block;
+  vertical-align: top;
+}
+main header img:first-child {
+  border-radius: 50%;
+}
+main header img:last-child {
+  width: 24px;
+  margin-top: 8px;
+}
+main header div {
+  margin-left: 10px;
+  margin-right: 145px;
+}
+main header h2 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+main header h3 {
+  font-size: 14px;
+  font-weight: normal;
+  color: #7e818a;
 }
 
-::-moz-placeholder {
-  color: rgba(255, 255, 255, 0.9);
+#chat {
+  padding-left: 0;
+  margin: 0;
+  list-style-type: none;
+  overflow-y: scroll;
+  height: 535px;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+#chat li {
+  padding: 10px 30px;
+}
+#chat h2,
+#chat h3 {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: normal;
+}
+#chat h3 {
+  color: #bbb;
+}
+#chat .entete {
+  margin-bottom: 5px;
+}
+#chat .message {
+  padding: 20px;
+  color: #fff;
+  line-height: 25px;
+  max-width: 90%;
+  display: inline-block;
+  text-align: left;
+  border-radius: 5px;
+}
+#chat .me {
+  text-align: right;
+}
+#chat .you .message {
+  background-color: #58b666;
+}
+#chat .me .message {
+  background-color: #6fbced;
+}
+#chat .triangle {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+}
+#chat .you .triangle {
+  border-color: transparent transparent #58b666 transparent;
+  margin-left: 15px;
+}
+#chat .me .triangle {
+  border-color: transparent transparent #6fbced transparent;
+  margin-left: 890px;
 }
 
-:-ms-input-placeholder {  
-   color: rgba(255, 255, 255, 0.9);
+main footer {
+  height: 155px;
+  padding: 20px 30px 10px 20px;
+}
+main footer textarea {
+  resize: none;
+  border: none;
+  display: block;
+  width: 100%;
+  height: 80px;
+  border-radius: 3px;
+  padding: 20px;
+  font-size: 13px;
+  margin-bottom: 13px;
+}
+main footer textarea::placeholder {
+  color: #ddd;
+}
+main footer img {
+  height: 30px;
+  cursor: pointer;
+}
+main footer a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #6fbced;
+  vertical-align: top;
+  margin-left: 333px;
+  margin-top: 5px;
+  display: inline-block;
+}
+.msger-send-btn {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+}
+
+.msger-send-btn:hover {
+  background: rgb(0, 180, 50);
 }
