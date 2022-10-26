@@ -9,7 +9,7 @@ import json
 import os
 import re
 
-classes = pickle.load(open('labels.pkl', 'rb'))
+genres_name = pickle.load(open('labels.pkl', 'rb'))
 
 # get value from enviroment variable
 tenorflow_url = os.environ.get(
@@ -31,33 +31,30 @@ def get_responce_from_model_server(msg):
     predictions = json.loads(json_response.text)['predictions']
     return predictions
 
-# create a dictionory of predection and class name
 
 
-def get_prediction_dict(predictions):
-    prediction_dict = {}
-    for i, p in enumerate(predictions[0]):
-        prediction_dict[classes[i]] = p
-    return prediction_dict
+def genre_predictor(prediction):
+  prediction_dict = {}
+ 
+  #creating a dictionory of prediction and class name
+  for i,p in enumerate(prediction[0]):
+    prediction_dict[genres_name[i]] = p
 
-# Filter the dictionary to get only the intents that are above the threshold
+  genres = []
 
+  #Filtering the dictionary to get only the intents that are above the threshold
+  for key,value in prediction_dict.items():
 
-def filter_predictions(predictions, threshold):
-    filtered_predictions = {}
-    for key, value in predictions.items():
-        if value > threshold:
-            filtered_predictions[key] = value
-    return filtered_predictions
+    if value > 0.2:
+      genres.append(key)
 
-# Convert dictionary keys to text seprated by comma
+  #Converting those filtered dictionary keys to text
+  text = 'predicted genres are: '
 
+  for i in genres:
+    text += i + ","
 
-def get_text_from_dict(dict):
-    text = "Predected Genres are "
-    for key in dict:
-        text += key + ", "
-    return text
+  return text
 
 # function to clean the word of any punctuation or special characters and lowwer it
 
@@ -74,9 +71,7 @@ def cleanPunc(sentence):
 def chatbot_response(msg):
     msg = cleanPunc(msg)
     pred = get_responce_from_model_server(msg)
-    pred = get_prediction_dict(pred)
-    pred = filter_predictions(pred, predict_threshold)
-    pred = get_text_from_dict(pred)
+    pred = genre_predictor(pred)
     return pred
 
 
