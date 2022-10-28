@@ -9,11 +9,10 @@ import json
 import os
 import re
 
-genres_name = pickle.load(open('labels.pkl', 'rb'))
 
 # get value from enviroment variable
 tenorflow_url = os.environ.get(
-    'TENSORFLOW_URL', 'http://localhost:4000/v1/models/multilabel_model:predict')
+    'TENSORFLOW_URL', 'http://localhost:8501/v1/models/multilabel_model:predict')
 
 predict_threshold = os.environ.get(
     'pred_threshold', "0.2")
@@ -33,28 +32,28 @@ def get_responce_from_model_server(msg):
 
 
 
-def genre_predictor(prediction):
-  prediction_dict = {}
+# def genre_predictor(prediction):
+#   prediction_dict = {}
  
-  #creating a dictionory of prediction and class name
-  for i,p in enumerate(prediction[0]):
-    prediction_dict[genres_name[i]] = p
+#   #creating a dictionory of prediction and class name
+#   for i,p in enumerate(prediction[0]):
+#     prediction_dict[genres_name[i]] = p
 
-  genres = []
+#   genres = []
 
-  #Filtering the dictionary to get only the intents that are above the threshold
-  for key,value in prediction_dict.items():
+#   #Filtering the dictionary to get only the intents that are above the threshold
+#   for key,value in prediction_dict.items():
 
-    if value > 0.2:
-      genres.append(key)
+#     if value > 0.2:
+#       genres.append(key)
 
-  #Converting those filtered dictionary keys to text
-  text = 'predicted genres are: '
+#   #Converting those filtered dictionary keys to text
+#   text = 'predicted genres are: '
 
-  for i in genres:
-    text += i + ","
+#   for i in genres:
+#     text += i + ","
 
-  return text
+#   return text
 
 # function to clean the word of any punctuation or special characters and lowwer it
 
@@ -67,11 +66,21 @@ def cleanPunc(sentence):
     cleaned = cleaned.lower()
     return cleaned
 
+def sentiment_predictor(prediction):
+  
+    temp=""
+    
+    if prediction >= 0.5:
+       temp = "Positive"
+    else:
+       temp = "Negative"
+
+    return temp
 
 def chatbot_response(msg):
     msg = cleanPunc(msg)
     pred = get_responce_from_model_server(msg)
-    pred = genre_predictor(pred)
+    pred = sentiment_predictor(pred)
     return pred
 
 
