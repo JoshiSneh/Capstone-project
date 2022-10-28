@@ -14,13 +14,6 @@ import re
 tenorflow_url = os.environ.get(
     'TENSORFLOW_URL', ''http://localhost:8501/v1/models/multilabel_model:predict')
 
-predict_threshold = os.environ.get(
-    'pred_threshold', "0.2")
-
-predict_threshold = float(predict_threshold)
-# Get responce from tensorflow model server
-
-
 def get_responce_from_model_server(msg):
     data = json.dumps(
         {"signature_name": "serving_default", "instances": [msg]})
