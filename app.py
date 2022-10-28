@@ -53,7 +53,7 @@ def chatbot_response(msg):
     msg = cleanPunc(msg)
     pred = get_responce_from_model_server(msg)
     print(pred)
-    pred = sentiment_predictor(pred[0])
+    pred = sentiment_predictor(pred[0][0])
     return pred
 
 
