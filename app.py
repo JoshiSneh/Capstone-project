@@ -42,7 +42,7 @@ def sentiment_predictor(prediction):
     
     temp=""
     
-    if prediction >= 0.5:
+    if prediction > 0.5:
        temp = "Positive"
     else:
        temp = "Negative"
