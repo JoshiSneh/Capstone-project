@@ -13,7 +13,7 @@ genres_name = pickle.load(open('labels.pkl', 'rb'))
 
 # get value from enviroment variable
 tenorflow_url = os.environ.get(
-    'TENSORFLOW_URL', 'http://localhost:4000/v1/models/multilabel_model:predict')
+    'TENSORFLOW_URL', ''http://localhost:8501/v1/models/multilabel_model:predict')
 
 predict_threshold = os.environ.get(
     'pred_threshold', "0.2")
@@ -66,12 +66,24 @@ def cleanPunc(sentence):
     cleaned = cleaned.replace("\n", " ")
     cleaned = cleaned.lower()
     return cleaned
+    
+#Defining a function to get genres name from model predicted value
 
+def sentiment_predictor(prediction):
+    
+    temp=""
+    
+    if prediction >= 0.5:
+       temp = "Positive"
+    else:
+       temp = "Negative"
+
+    return temp
 
 def chatbot_response(msg):
     msg = cleanPunc(msg)
     pred = get_responce_from_model_server(msg)
-    pred = genre_predictor(pred)
+    pred = sentiment_predictor(pred)
     return pred
 
 
