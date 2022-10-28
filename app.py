@@ -12,7 +12,7 @@ import re
 
 # get value from enviroment variable
 tenorflow_url = os.environ.get(
-    'TENSORFLOW_URL', ''http://localhost:8501/v1/models/multilabel_model:predict')
+    'TENSORFLOW_URL', 'http://localhost:8501/v1/models/multilabel_model:predict')
 
 def get_responce_from_model_server(msg):
     data = json.dumps(
