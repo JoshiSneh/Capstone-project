@@ -9,7 +9,6 @@ import json
 import os
 import re
 
-genres_name = pickle.load(open('labels.pkl', 'rb'))
 
 # get value from enviroment variable
 tenorflow_url = os.environ.get(
