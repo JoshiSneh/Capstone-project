@@ -32,29 +32,6 @@ def get_responce_from_model_server(msg):
 
 
 
-def genre_predictor(prediction):
-  prediction_dict = {}
- 
-  #creating a dictionory of prediction and class name
-  for i,p in enumerate(prediction[0]):
-    prediction_dict[genres_name[i]] = p
-
-  genres = []
-
-  #Filtering the dictionary to get only the intents that are above the threshold
-  for key,value in prediction_dict.items():
-
-    if value > 0.2:
-      genres.append(key)
-
-  #Converting those filtered dictionary keys to text
-  text = 'predicted genres are: '
-
-  for i in genres:
-    text += i + ","
-
-  return text
-
 # function to clean the word of any punctuation or special characters and lowwer it
 
 
